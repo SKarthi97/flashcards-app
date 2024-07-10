@@ -6,10 +6,55 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>Flashcards</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <style>
+        /* Custom CSS */
+    
+        :root {
+            --accent: #6e48ad;
+            --accent-bg: white;
+            --bg: #fff;
+            --text: #212121;
+            --text-light: #585858;
+            --border: #d8dae1;
+            --code: #d81b60;
+            --preformatted: #444;
+        }
+    
+        article {
+            background-color: var(--marked);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            padding: 1em;
+            margin: 1em 0;
+        }
+    
+        h2 {
+            text-align: center;
+        }
+    
+        h2, h4 {
+            margin-top: 0;
+        }
+    
+        hr {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+    
+        button,
+        a[role="button"] {
+            color: white;
+            text-decoration: none;
+        }
+    
+        input, select, textarea {
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
