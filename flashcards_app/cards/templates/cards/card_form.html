@@ -1,0 +1,15 @@
+<!-- templates/cards/card_form.html -->
+
+{% extends "cards/base.html" %}
+
+{% block content %}
+    <h2>✏️ Edit Card</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Save Card">
+    </form>
+    <a href="{% url 'card-list' %}">
+        Cancel
+    </a>
+{% endblock %}
