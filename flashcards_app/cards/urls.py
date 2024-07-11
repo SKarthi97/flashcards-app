@@ -10,4 +10,9 @@ urlpatterns = [
         views.CardListView.as_view(),
         name="card-list"
     ),
+    path(
+        "edit/<int:pk>",
+        views.CardUpdateView.as_view(),
+        name="card-update"
+    ),
 ]
