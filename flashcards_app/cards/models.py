@@ -20,3 +20,12 @@ class Card(models.Model):
     def __str__(self):
         return self.question
 
+    # To replicate the behavior of moving a card between boxes
+    def move(self, solved):
+        new_box = self.box + 1 if solved else BOXES[0]
+        
+        if new_box in BOXES:
+            self.box = new_box
+            self.save()
+            
+        return self
