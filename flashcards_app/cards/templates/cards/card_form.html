@@ -8,11 +8,11 @@
     {% else %}
         <h2>✨ Create New Card</h2>
     {% endif %}
-    <from>
+    <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Save Card" />
-    </from>
+        <input type="submit" value="Save Card">
+    </form>
     <a href="{% url 'card-list' %}">
         Cancel
     </a>
