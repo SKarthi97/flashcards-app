@@ -1,0 +1,27 @@
+<!-- cards/templates/cards/card_confirm_delete.html -->
+
+{% extends "cards/base.html" %}
+{% load humanize %}
+
+{% block content %}
+
+<h3>Delete Card</h3>
+
+<p>Are you sure you want to delete the <b>{{ card.question }}</b> Card from the 🗃 {{card.box | ordinal}} Box?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <input
+            value="Yes, delete."
+            type="submit">
+    </div>
+    <div>
+        <input style="background-color: #6c757d"
+            value="Cancel"
+            type="button"
+            onclick="location.href='{% url "card-list" %}';">
+    </div>
+</form>
+
+{% endblock %}
