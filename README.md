@@ -15,7 +15,7 @@ The Flashcard App is a simple and intuitive application designed to help users c
 
 ## Features
 - Create and manage multiple sets of flashcards
-- Add or edit flashcards within each set
+- Add, edit and delete flashcards within each set
 - Study flashcards in random or sequential order
 - Track your progress and review your performance
 - User-friendly interface and responsive design
