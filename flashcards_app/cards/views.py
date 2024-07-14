@@ -6,6 +6,7 @@ from django.views.generic import (
     ListView,
     CreateView,
     UpdateView,
+    DeleteView,
 )
 from .forms import CardCheckForm
 
@@ -25,6 +26,12 @@ class CardCreateView(CreateView):
 class CardUpdateView(CardCreateView, UpdateView):
     model = Card
     success_url = reverse_lazy("card-list")
+
+
+class CardDeleteView(DeleteView):
+    model = Card
+    success_url = reverse_lazy("card-list")
+
 
 
 class BoxView(CardListView):

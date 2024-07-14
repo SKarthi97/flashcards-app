@@ -25,4 +25,9 @@ urlpatterns = [
         views.BoxView.as_view(),
         name="box"
     ),
+    path(
+        "delete/<int:pk>",
+        views.CardDeleteView.as_view(),
+        name="card-delete"
+    ),
 ]
