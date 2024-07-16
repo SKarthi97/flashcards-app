@@ -11,14 +11,18 @@
 - [Contact](#contact)
 
 ## Introduction
-The Flashcard App is a simple and intuitive application designed to help users create, manage, and review flashcards for effective learning and memorization. Whether you're studying for exams, learning a new language, or trying to remember important facts, this app provides an easy way to organize and review your flashcards.
+The **Flashcard App** is a powerful and user-friendly application designed to help you create, manage, and review flashcards. Whether you're studying for exams, learning a new language, or retaining important information, this app is your perfect companion.
+
+![alt text](flashcards_app/cards/img/screenshot1.png)
 
 ## Features
-- Create and manage multiple sets of flashcards
-- Add or edit flashcards within each set
-- Study flashcards in random or sequential order
-- Track your progress and review your performance
-- User-friendly interface and responsive design
+- **Create and Manage Flashcard Sets:** Easily create multiple sets for different subjects.
+- **Add, Edit, and Delete Flashcards:** Full control over your flashcards.
+- **Study in Random or Sequential Order:** Flexible study modes to suit your needs.
+- **Track Progress:** Monitor your performance and identify areas for improvement.
+- **Responsive Design:** User-friendly interface that works on all devices.
+
+![alt text](flashcards_app/cards/img/screenshot2.png)
 
 ## Prerequisites
 Before you begin, ensure you have met the following requirements:
@@ -97,3 +101,6 @@ For any questions or suggestions, please contact:
 - Your Name - [Karthick Sivakumar](mailto:karthicksivakumar97@gmail.com)
 - Project Link: [https://github.com/SKarthi97/flashcards-app](https://github.com/SKarthi97/flashcards-app)
 
+---
+
+Enhance your learning with the **Flashcard App**! Happy Studying!

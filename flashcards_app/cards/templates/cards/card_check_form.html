@@ -1,12 +1,16 @@
-<!-- cards/template/cards/card_check_form.html -->
-
-<form method="post">
+<form method="post" class="card-check-form">
     {% csrf_token %}
     <input type="hidden" name="card_id" value="{{ card.id }}">
     <input type="hidden" name="solved" value="{{ solved }}">
-    {% if solved %}
-        <input type="submit" value="✅ I know"/>
-    {% else %}
-        <input type="submit" value="❌ I don't know"/>
-    {% endif %}
+    <div class="form-group">
+        {% if solved %}
+            <button type="submit" class="btn btn-success custom-btn">
+                ✅ I know
+            </button>
+        {% else %}
+            <button type="submit" class="btn btn-danger custom-btn">
+                ❌ I don't know
+            </button>
+        {% endif %}
+    </div>
 </form>

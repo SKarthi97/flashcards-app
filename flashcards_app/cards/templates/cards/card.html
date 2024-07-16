@@ -1,21 +1,20 @@
-<!-- cards/templates/cards/card.html -->
-
-<article>
-    <h4>{{ card.question }}</h4>
+<article class="card-article">
+    <h4 class="card-question">{{ card.question }}</h4>
     {% if not check_card %}
-        <p>{{ card.answer }}</p>
         <hr>
-        <a href="{% url 'card-update' card.id %}" role="button">
+        <a href="{% url 'card-update' set_id card.id %}" role="button" class="btn btn-primary" style="margin= 10px">
             ✏️ Edit Card
         </a>
+        <a href="{% url 'card-delete' set_id card.id %}" role="button" class="btn btn-danger" style="margin= 10px">
+            🗑 Delete Card
+        </a>
     {% else %}
-        <details>
-            <summary>Reveal Answer</summary>
+        <button class="accordion">Reveal Answer</button>
+        <div class="panel">
             <p>{{ card.answer }}</p>
-        </details>
+        </div>
         <hr>
         {% include "cards/card_check_form.html" with solved=True %}
         {% include "cards/card_check_form.html" with solved=False %}
     {% endif %}
-    
 </article>
