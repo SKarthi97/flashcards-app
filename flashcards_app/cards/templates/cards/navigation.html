@@ -1,8 +1,7 @@
-<!-- cards/templates/cards/navigation.html -->
-
 {% load cards_tags %}
 
-<nav>
-    <a href="{% url "card-list" %}">🗂 All Cards</a>
-    {% boxes_as_links %}
+<nav class="navigation">
+    <a href="{% url 'index' %}" class="nav-link">All Sets</a>
+    <a href="{% url 'card-list' set_id %}" class="nav-link">All Cards</a>
+    {% boxes_as_links set_id %}
 </nav>

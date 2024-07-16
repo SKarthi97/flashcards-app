@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block test %}
+<header>
+    <h1>Welcome to Flashcards app!</h1>
+</header>
+
+<div class="container">
+    <main>
+    <div class="form-container">
+        <h3>{{ title }}</h3>
+        <form method="post" class="card-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_name">Name:</label>
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                <label for="id_description">Description:</label>
+                {{ form.description }}
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="{% url 'index' %}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

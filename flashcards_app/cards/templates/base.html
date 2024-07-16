@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Flashcards</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS variables */
+        :root {
+            --primary-color: #007bff; /* Blue */
+            --secondary-color: #6c757d; /* Grey */
+            --danger-color: #dc3545; /* Red */
+            --accent-color: #4CAF50; /* Green */
+            --accent-bg-color: #E8F5E9; /* Light green background */
+            --bg-color: #F1F8E9; /* Very light green */
+            --text-color: #2E7D32; /* Dark green */
+            --text-light-color: #66BB6A; /* Light green */
+            --border-color: #A5D6A7; /* Light green border */
+            --code-color: #C62828; /* Red */
+            --preformatted-color: #388E3C; /* Darker green */
+            --button-bg-color: #388E3C; /* Green */
+            --button-hover-bg-color: #1B5E20; /* Dark green */
+            --button-text-color: white;
+            --card-bg-color: #66BB6A; /* Light green */
+            --card-hover-bg-color: #4CAF50; /* Green */
+            --card-title-color: white;
+        }
+
+        /* General styles */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-top: 0;
+        }
+
+        hr {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            margin: 20px 0;
+        }
+
+        /* Button styles */
+        .btn {
+            background-color: var(--button-bg-color);
+            color: var(--button-text-color);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .btn:hover {
+            background-color: var(--button-hover-bg-color);
+            transform: scale(1.1);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            border-color: #004085;
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            border-color: var(--danger-color);
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333; /* Darker red on hover */
+            border-color: #bd2130;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268; /* Darker grey on hover */
+            border-color: #545b62;
+        }
+
+        /* Card styles */
+        .card-custom {
+            background-color: var(--card-bg-color);
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, background-color 0.3s;
+            color: var(--card-title-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-custom:hover {
+            transform: scale(1.05);
+            background-color: var(--card-hover-bg-color);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-custom .card-body {
+            background: transparent;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-custom .btn {
+            background-color: var(--button-bg-color);
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .card-custom .btn:hover {
+            background-color: var(--button-hover-bg-color);
+        }
+
+        .card-custom .card-title {
+            font-weight: bold;
+        }
+
+        .card-form-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .card-form-container h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .card-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Space between form elements */
+        }
+        
+        .card-form p {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .card-form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .card-form input[type="text"],
+        .card-form textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .card-check-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .card-check-form .form-group {
+            margin: 0;
+        }
+        
+        .card-check-form .custom-btn {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-check-form .custom-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .card-check-form .btn-success.custom-btn {
+            background-color: var(--accent-color); /* Green */
+            border: none;
+            color: white;
+        }
+        
+        .card-check-form .btn-success.custom-btn:hover {
+            background-color: #2E7D32; /* Darker green */
+        }
+        
+        .card-check-form .btn-danger.custom-btn {
+            background-color: var(--danger-color); /* Red */
+            border: none;
+            color: white;
+        }
+        
+        .card-check-form .btn-danger.custom-btn:hover {
+            background-color: #C62828; /* Darker red */
+        }
+
+        .carousel-inner {
+            margin-top: 20px;
+        }
+        
+        .carousel-control-prev, .carousel-control-next {
+            filter: invert(100%);
+        }
+        
+        .carousel-control-prev:hover, .carousel-control-next:hover {
+            filter: invert(70%);
+        }
+
+        /* Navigation styles */
+        .navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-link {
+            display: inline-block;
+            padding: 10px;
+            margin-right: 10px;
+            color: var(--primary-color); /* Adjust color as needed */
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .nav-link:hover {
+            color: #6E48AA; /* Adjust hover color as needed */
+        }
+
+        /* Box links styles */
+        .box-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .box-link {
+            display: inline-block;
+            padding: 10px;
+            margin-right: 10px;
+            color: #6E48AA; /* Adjust color as needed */
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid #6E48AA; /* Adjust border color as needed */
+            border-radius: 5px;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        }
+
+        .box-link:hover {
+            background-color: #6E48AA; /* Adjust hover background color as needed */
+            color: white;
+        }
+
+        .card-count {
+            margin-left: 5px;
+            background-color: #6E48AA; /* Adjust count background color as needed */
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.8em;
+        }
+
+        /* Delete card container styles */
+        .delete-card-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .delete-card-container h3 {
+            margin-top: 0;
+            color: #6E48AA; /* Adjust color as needed */
+        }
+
+        .delete-card-container p {
+            margin-bottom: 20px;
+        }
+
+        /* Form container styles */
+        .form-container {
+            max-width: 600px;
+            margin: 20px auto; /* Center the form horizontally with top and bottom margin */
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .form-container h3 {
+            margin-top: 0;
+            color: #6E48AA; /* Adjust color as needed */
+        }
+
+        .form-actions {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px; /* Space between buttons */
+        }
+
+        .form-actions .btn {
+            flex: 1;
+            text-align: center;
+        }
+
+        /* Adjust form group for proper alignment */
+        .form-group {
+            margin-bottom: 15px; /* Spacing between each form group */
+        }
+
+        /* Optional: Adjust label styling for consistency */
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+
+        /* Optional: Adjust input field styling */
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Optional styles for additional elements */
+        .card-article {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-question {
+            color: var(--text-color);
+            font-weight: bold;
+        }
+
+        .accordion {
+            background-color: var(--button-bg-color);
+            color: white /* Adjust color as needed */
+            cursor: pointer;
+            padding: 10px 20px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .accordion:hover {
+            background-color: var(--button-hover-bg-color);
+            transform: scale(1.05);
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: var(--accent-bg-color);
+            display: none;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+        
+        .panel p {
+            padding: 10px;
+            color: var(--text-color);
+        }
+
+        .panel.show {
+            display: block;
+        }
+        /* Minimalist Footer styles */
+        footer {
+            background-color: #f8f9fa;
+            color: #6c757d;
+            padding: 20px 0;
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-content p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .footer-links li {
+            display: inline;
+        }
+
+        .footer-links a {
+            color: #6c757d;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #007bff;
+        }
+
+        @media (max-width: 768px) {
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    {% block test %}
+    <header>
+        <h1>{{ flashcard_set_name }} Flashcards</h1>
+    </header>
+
+    <div class="container">
+        <main>
+            {% block content %}
+            {% endblock %}
+    {% endblock %}
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Flashcards App. All Rights Reserved.</p>
+            <ul class="footer-links">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript and any additional scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.display === "block") {
+                        panel.style.display = "none";
+                    } else {
+                        panel.style.display = "block";
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

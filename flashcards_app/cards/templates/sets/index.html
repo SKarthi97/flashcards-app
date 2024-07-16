@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block test %}
+    <header>
+        <h1>Welcome to Flashcards app!</h1>
+    </header>
+
+    <div class="container">
+        <main>
+    <p>
+        <input
+            value="Add a new flashcard set"
+            type="button"
+            class="btn btn-primary"
+            style="width: 100%"
+            onclick="location.href='{% url "flash-card-set-add" %}'"/>
+    </p>
+    {% if object_list %}
+        <h2>Flashcards Sets</h2>
+    {% endif %}
+    <div class="container mt-5">
+        {% if object_list %}
+            <div id="flashcardCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    {% for flashcard_set in object_list %}
+                        {% if forloop.counter0|divisibleby:6 %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <div class="row">
+                        {% endif %}
+                        
+                        <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm card-custom">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ flashcard_set.name | upper }}</h5>
+                                    <p class="card-text">{{ flashcard_set.description }}</p>
+                                    <a href="{% url 'card-list' flashcard_set.id %}" class="btn btn-primary">View Flashcards</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {% if forloop.counter0|add:1|divisibleby:6 or forloop.last %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#flashcardCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#flashcardCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <h3>No flashcard sets available</h3>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
