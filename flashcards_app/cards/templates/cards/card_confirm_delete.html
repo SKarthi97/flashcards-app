@@ -1,27 +1,19 @@
-<!-- cards/templates/cards/card_confirm_delete.html -->
-
-{% extends "cards/base.html" %}
+{% extends "base.html" %}
 {% load humanize %}
 
 {% block content %}
+    {% include "cards/navigation.html" %}
+    <div class="delete-card-container">
+        <h3>Delete Card</h3>
 
-<h3>Delete Card</h3>
+        <p>Are you sure you want to delete the <b>{{ card.question }}</b> Card from the 🗃 {{ card.box|ordinal }} Box?</p>
 
-<p>Are you sure you want to delete the <b>{{ card.question }}</b> Card from the 🗃 {{card.box | ordinal}} Box?</p>
-
-<form method="post">
-    {% csrf_token %}
-    <div>
-        <input
-            value="Yes, delete."
-            type="submit">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-actions">
+                <button type="submit" class="btn btn-danger">Yes, delete</button>
+                <a href="{% url 'card-list' set_id %}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
     </div>
-    <div>
-        <input style="background-color: #6c757d"
-            value="Cancel"
-            type="button"
-            onclick="location.href='{% url "card-list" %}';">
-    </div>
-</form>
-
 {% endblock %}

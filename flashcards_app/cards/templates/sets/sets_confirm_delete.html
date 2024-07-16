@@ -1,0 +1,26 @@
+
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block content %}
+
+<h3>Delete Card</h3>
+
+<p>Are you sure you want to delete the Set</p>
+
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <input
+            value="Yes, delete."
+            type="submit">
+    </div>
+    <div>
+        <input style="background-color: #6c757d"
+            value="Cancel"
+            type="button"
+            onclick="location.href='{% url "card-list" set_id %}';">
+    </div>
+</form>
+
+{% endblock %}
